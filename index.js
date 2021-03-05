@@ -9,7 +9,7 @@ app.use(cors());
 app.use('/api/articles', articles);
 
 app.get('/', (req, res) => {
-  res.send('Cookbook API');
+  res.send('Futuristic Cookbook API 🚀');
 });
 
 app.all('*', (req, res) => {
