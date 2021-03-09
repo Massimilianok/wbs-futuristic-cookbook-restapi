@@ -1,4 +1,5 @@
 const pool = require('../client');
+const path = require('path');
 
 const getAllArticles = (req, res) => {
   pool
@@ -38,7 +39,6 @@ const createOneArticle = (req, res) => {
       'INSERT INTO blogarticles (articleID, title, description, category) VALUES ($1, $2, $3, $4) RETURNING *',
     values: [articleID, title, description, category],
   };
-
   pool
     .query(createOneArticle)
     .then((data) =>
@@ -51,8 +51,26 @@ const createOneArticle = (req, res) => {
     );
 };
 
+const uploadImageArticle = (req, res) => {
+  const { filename } = req.file;
+  const { id } = req.params;
+  const uploadImageArticle = {
+    text: 'UPDATE blogarticles SET imagename=$2 WHERE articleid=$1',
+    values: [id, filename],
+  };
+  pool
+    .query(uploadImageArticle)
+    .then((data) =>
+      res.status(201).json({ code: 200, message: 'Image uploaded' })
+    )
+    .catch((err) =>
+      res.status(500).json({ code: 500, error: 'Internal server errors!' })
+    );
+};
+
 module.exports = {
   getAllArticles,
   getOneArticle,
-  createOneArticle
+  createOneArticle,
+  uploadImageArticle,
 };

@@ -1,5 +1,6 @@
 const express = require('express');
-const articleMiddleware = require('../middleware/validationArticle');
+const validationArticle = require('../middleware/validationArticle');
+const uploadImage = require('../middleware/uploadImage');
 const articleController = require('../controller/articleController');
 
 const router = express.Router();
@@ -9,10 +10,15 @@ router.get('/:id', articleController.getOneArticle);
 router.post(
   '/create',
   [
-    articleMiddleware.validateArticleParams,
-    articleMiddleware.validationArticle,
+    validationArticle.validateArticleParams,
+    validationArticle.validationArticle,
   ],
   articleController.createOneArticle
+);
+router.put(
+  '/upload/:id',
+  uploadImage.single('articleImage'),
+  articleController.uploadImageArticle
 );
 
 module.exports = router;
