@@ -3,8 +3,8 @@ const { body, validationResult } = require('express-validator');
 const validateArticleParams = [
   body('articleID').notEmpty().isUUID(),
   body('title').notEmpty().trim().escape(),
-  body('description').notEmpty().trim().escape(),
-  body('category').notEmpty().trim().escape(),
+  body('description').notEmpty().trim(),
+  body('category').notEmpty(),
 ]
 
 const validationArticle = (req, res, next) => {
