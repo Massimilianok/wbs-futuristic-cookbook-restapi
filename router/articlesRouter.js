@@ -1,7 +1,7 @@
 const express = require('express');
-const validationArticle = require('../middleware/validationArticle');
-const uploadImage = require('../middleware/uploadImage');
-const articleController = require('../controller/articleController');
+const validationArticle = require('../middlewares/validationArticle');
+const uploadImage = require('../middlewares/uploadImage');
+const articleController = require('../controllers/articleController');
 
 const router = express.Router();
 

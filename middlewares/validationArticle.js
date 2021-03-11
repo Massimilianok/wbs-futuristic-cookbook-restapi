@@ -2,7 +2,7 @@ const { body, validationResult } = require('express-validator');
 
 const validateArticleParams = [
   body('articleID').notEmpty().isUUID(),
-  body('title').notEmpty().trim().escape(),
+  body('title').notEmpty().trim(),
   body('description').notEmpty().trim(),
   body('category').notEmpty(),
 ]
